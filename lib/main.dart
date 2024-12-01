@@ -36,102 +36,54 @@ class _MyHomePageState extends State<MyHomePage> {
   Future playAudio(int x) async {
     try {
       await player.setAudioSource(AudioSource.asset('sound/$x.wav'));
-
       await player.play();
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sound Test'),
-      ),
-      body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.red)),
-                  child: Text('play sound 1'),
-                  onPressed: () async {
-                    await playAudio(1);
-                    // print(playAudio());
-                  }),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.orange)),
-                  child: Text('play sound 2'),
-                  onPressed: () async {
-                    await playAudio(2);
-                    // print(playAudio());
-                  }),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.amber)),
-                  child: Text('play sound 3'),
-                  onPressed: () async {
-                    await playAudio(3);
-                    // print(playAudio());
-                  }),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.green)),
-                  child: Text('play sound 4'),
-                  onPressed: () async {
-                    await playAudio(4);
-                    // print(playAudio());
-                  }),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.blueAccent)),
-                  child: Text('play sound 5'),
-                  onPressed: () async {
-                    await playAudio(5);
-                    // print(playAudio());
-                  }),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.purpleAccent)),
-                  child: Text('play sound 6'),
-                  onPressed: () async {
-                    await playAudio(6);
-                    // print(playAudio());
-                  }),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.brown)),
-                  child: Text('play sound 7'),
-                  onPressed: () async {
-                    await playAudio(7);
-                    // print(playAudio());
-                  }),
-            ]),
-      ),
-    );
+    var widtha =MediaQuery.of(context).size.width.toInt();
+    var heighta =MediaQuery.of(context).size.height.toInt();
+    Expanded buildwidget(int i, {required Color color }){
+      return Expanded(
+        flex: 1,
+        child: TextButton(
+            style:TextButton.styleFrom(
+              backgroundColor: color,
+              textStyle: TextStyle(fontSize: 18),
+             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
+            child: Text('play sound $i'),
+            onPressed: () async {
+              await playAudio(i);
+            }),
+      );
+    }
+     return Scaffold(
+       appBar: AppBar(
+         title: const Text('Sound Test'),
+       ),
+       body: Center(
+         child: Column(
+             mainAxisSize: MainAxisSize.max,
+             crossAxisAlignment: CrossAxisAlignment.stretch,
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: <Widget>[
+                buildwidget( 1, color: Colors.red),
+                buildwidget( 2, color: Colors.orange),
+                buildwidget( 3, color: Colors.yellow),
+                buildwidget( 4, color: Colors.green),
+                buildwidget( 5, color: Colors.blue),
+                buildwidget( 6, color: Colors.white),
+                buildwidget( 7, color: Colors.brown),
+             ]),
+       ),
+     );
+
+
+
+
   }
 }
